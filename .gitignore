@@ -2,3 +2,5 @@ build/bin
 .idea
 cover.out
 dist
+sops-operator
+INSTALL.md
