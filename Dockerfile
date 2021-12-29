@@ -20,8 +20,8 @@ RUN CGO_ENABLED=0 GO111MODULE=on go build -a -o sops-operator main.go
 FROM alpine:3.15
 
 RUN apk add --no-cache ca-certificates tzdata bash curl gnupg \
-    && addgroup -S sops-operator \
-    && adduser -S -g sops-operator sops-operator
+    && addgroup -S --gid 1000 sops-operator \
+    && adduser -S -u 1000 -g sops-operator sops-operator
 
 RUN curl -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.1/sops-v3.7.1.linux \
     && chmod +x /usr/local/bin/sops
