@@ -148,7 +148,7 @@ func (r *SopsSecretReconciler) manageError(ctx context.Context, instance *crafty
 		retryInterval = status.LastUpdate.Sub(lastUpdate.Time.Round(time.Second))
 	}
 
-	reqeueAfter := time.Duration(math.Min(float64(retryInterval.Nanoseconds()*2), float64(time.Hour.Nanoseconds()*6)))
+	reqeueAfter := time.Duration(math.Max(float64(retryInterval.Nanoseconds()*2), float64(time.Minute.Nanoseconds()*6)))
 	logger.Error(issue, "failed to reconcile SopsSecret", "reqeueAfter", reqeueAfter)
 	return reconcile.Result{
 		RequeueAfter: reqeueAfter,
